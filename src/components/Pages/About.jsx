@@ -1,4 +1,4 @@
-const One = () => {
+const About = () => {
   return (
     <div className="relative min-h-[50vh] sm:min-h-screen bg-customRed">
       {/* Background Image Container */}
@@ -48,4 +48,4 @@ const One = () => {
   );
 };
 
-export default One;
+export default About;

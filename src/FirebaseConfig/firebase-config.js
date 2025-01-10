@@ -2,14 +2,13 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyDaBNIwPTx-HpG9k3KkQV67Z5BDjfKF1bU",
-  authDomain: "easypark-5dc21.firebaseapp.com",
-  databaseURL: "https://easypark-5dc21-default-rtdb.firebaseio.com",
-  projectId: "easypark-5dc21",
-  storageBucket: "easypark-5dc21.appspot.com",
-  messagingSenderId: "94132117704",
-  appId: "1:94132117704:web:49d845a228a1e7a09b45fd",
-  measurementId: "G-3QV7Y4EVFM",
+  apiKey: "AIzaSyAOqcrb6JJchtPrnOTZMdF8o1ZMABSsaOs",
+  authDomain: "livetoexpress-480fd.firebaseapp.com",
+  projectId: "livetoexpress-480fd",
+  storageBucket: "livetoexpress-480fd.firebasestorage.app",
+  messagingSenderId: "1084319539717",
+  appId: "1:1084319539717:web:bbfe26e052e5dd9b9d326c",
+  measurementId: "G-TTY08DQZXS",
 });
 
 const db = firebaseApp.firestore();

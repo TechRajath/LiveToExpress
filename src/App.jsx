@@ -7,12 +7,12 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import HomePage from "./components/HomePage/HomePage";
+import HomePage from "./components/Pages/HomePage";
 import MultiFormPage from "./components/Forms/MultiFormPage";
-import Slider from "./components/HomePage/Slider";
+import CreativeCorner from "./components/Pages/CreativeCorner";
 import Footer from "./components/Footer/Footer";
-import One from "./components/HomePage/One";
-import Two from "./components/HomePage/Two";
+import About from "./components/Pages/About";
+import What from "./components/Pages/What";
 
 const AppContent = () => {
   const location = useLocation();
@@ -64,13 +64,13 @@ const AppContent = () => {
                   <HomePage />
                 </div>
                 <div ref={oneRef}>
-                  <One />
+                  <About />
                 </div>
                 <div ref={twoRef}>
-                  <Two />
+                  <What />
                 </div>
                 <div ref={sliderRef}>
-                  <Slider />
+                  <CreativeCorner />
                 </div>
                 <div ref={formRef}>
                   <MultiFormPage />
@@ -79,8 +79,8 @@ const AppContent = () => {
               </>
             }
           />
-          <Route path="/one" element={<One />} />
-          <Route path="/two" element={<Two />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/two" element={<What />} />
           <Route path="/form" element={<MultiFormPage />} />
         </Routes>
       </div>

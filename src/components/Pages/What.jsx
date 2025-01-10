@@ -1,4 +1,4 @@
-const Two = () => {
+const What = () => {
   return (
     <div className="relative bg-customRed">
       {/* Container for both image and content */}
@@ -52,4 +52,4 @@ const Two = () => {
   );
 };
 
-export default Two;
+export default What;
