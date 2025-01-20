@@ -13,6 +13,7 @@ import CreativeCorner from "./components/Pages/CreativeCorner";
 import Footer from "./components/Footer/Footer";
 import About from "./components/Pages/About";
 import What from "./components/Pages/What";
+import Animation from "./components/AnimationTest/Animation";
 
 const AppContent = () => {
   const location = useLocation();
@@ -60,15 +61,16 @@ const AppContent = () => {
             path="/"
             element={
               <>
-                <div ref={homePageRef}>
+                <Animation />
+                {/* <div ref={homePageRef}>
                   <HomePage />
-                </div>
-                <div ref={oneRef}>
+                </div> */}
+                {/* <div ref={oneRef}>
                   <About />
                 </div>
                 <div ref={twoRef}>
                   <What />
-                </div>
+                </div>*/}
                 <div ref={sliderRef}>
                   <CreativeCorner />
                 </div>
@@ -80,7 +82,7 @@ const AppContent = () => {
             }
           />
           <Route path="/About" element={<About />} />
-          <Route path="/two" element={<What />} />
+          <Route path="/What" element={<What />} />
           <Route path="/form" element={<MultiFormPage />} />
         </Routes>
       </div>

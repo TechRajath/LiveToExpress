@@ -38,14 +38,29 @@ const Form = () => {
 
     if (!firstName || interests.length === 0 || !phone || !email) {
       toast.error(
-        "Required fields are missing. Please fill in all the required fields."
+        "Required fields are missing. Please fill in all the required fields.",
+        {
+          style: {
+            fontFamily: "Poor Story, cursive",
+            fontSize: "16px",
+            color: "#333",
+          },
+        }
       );
+
       return;
     }
 
     try {
       await db.collection("userResponse").add(formData);
-      toast.success("We received your interests! Thank you!");
+      toast.success("We received your interests! Thank you!", {
+        style: {
+          fontFamily: "Poor Story, cursive",
+          fontSize: "16px",
+          color: "#333",
+        },
+      });
+
       setFormData({
         firstName: "",
         lastName: "",
@@ -68,10 +83,10 @@ const Form = () => {
       <ToastContainer />
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal text-black mb-4 md:mb-0">
+          <h1 className="text-4xl sm:text-4xl md:text-5xl font-normal text-black mb-4 md:mb-0">
             START HERE
           </h1>
-          <p className="text-xl sm:text-2xl md:text-3xl max-w-xl text-black font-normal capitalize">
+          <p className="text-2xl sm:text-2xl md:text-3xl max-w-xl text-black font-normal capitalize">
             #LiveToExpress is conducting live creative events to help you
             express & experience. Fill in the form below to share your interests
             and we will contact you!
@@ -186,7 +201,7 @@ const Form = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-6 py-2 bg-black text-white text-base sm:text-lg md:text-xl transition-colors font-normal capitalize"
+              className="px-6 py-2 bg-black text-white text-base sm:text-lg md:text-2xl transition-colors font-normal capitalize"
             >
               Submit
             </button>
