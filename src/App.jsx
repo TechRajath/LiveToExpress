@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import About from "./components/Pages/About";
 import What from "./components/Pages/What";
 import Animation from "./components/AnimationTest/Animation";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 const AppContent = () => {
   const location = useLocation();
@@ -61,16 +62,16 @@ const AppContent = () => {
             path="/"
             element={
               <>
-                <Animation />
-                {/* <div ref={homePageRef}>
+                {/* <Animation /> */}
+                <div ref={homePageRef}>
                   <HomePage />
-                </div> */}
-                {/* <div ref={oneRef}>
+                </div>
+                <div ref={oneRef}>
                   <About />
                 </div>
                 <div ref={twoRef}>
                   <What />
-                </div>*/}
+                </div>
                 <div ref={sliderRef}>
                   <CreativeCorner />
                 </div>

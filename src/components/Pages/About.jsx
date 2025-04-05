@@ -1,49 +1,37 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 const About = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="relative min-h-[50vh] sm:min-h-screen bg-customRed">
-      {/* Background Image Container */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{
-          backgroundImage: `url('/images/No-bg-why.png')`,
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          height: "100%",
-          width: "100%",
-        }}
-      ></div>
-
-      {/* Content Container */}
-      <div className="relative flex flex-col justify-center items-center min-h-[50vh] sm:min-h-screen space-y-6 sm:space-y-12">
-        {/* Centered Title with Subtitle */}
-        <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-4">
-          <h1
-            className="text-center text-white text-3xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-6xl"
-            style={{
-              fontFamily: "Poor Story",
-              fontStyle: "normal",
-              fontWeight: "400",
-              lineHeight: "normal",
-            }}
-          >
-            How does it help?
-          </h1>
-
-          <p
-            className="text-center text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl"
-            style={{
-              fontFamily: "Poor Story",
-              fontStyle: "normal",
-              fontWeight: "400",
-              lineHeight: "normal",
-            }}
-          >
-            By building a space where expression is celebrated, and
-            individuality is valued.
-          </p>
-        </div>
-      </div>
+    <div className="relative min-h-screen bg-forestGreen flex justify-center items-center">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: isVisible ? 0 : 100, opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center"
+      >
+        <h1
+          className="text-black text-6xl sm:text-9xl font-bold"
+          style={{ fontFamily: "Poor Story" }}
+        >
+          WE CREATE A NEW SOUND. JOIN US.
+        </h1>
+      </motion.div>
     </div>
   );
 };

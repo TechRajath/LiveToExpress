@@ -15,6 +15,8 @@ export default {
 
       colors: {
         customRed: "#D40927",
+        newGreen:"#cdf851",
+        forestGreen:"#03AC13"
       },
     },
   },
