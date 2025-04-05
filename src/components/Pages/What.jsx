@@ -1,53 +1,168 @@
+import { useState, useEffect, useRef } from 'react';
+
 const What = () => {
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const playerRef = useRef(null);
+
+  // Function to toggle mute
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    
+    // Handle YouTube player if it exists
+    if (window.YT && playerRef.current) {
+      if (isMuted) {
+        playerRef.current.unMute();
+      } else {
+        playerRef.current.mute();
+      }
+    }
+  };
+
+  // Initialize YouTube API
+  useEffect(() => {
+    // Load YouTube API script
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Setup YouTube player once API is ready
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player('youtube-player', {
+        videoId: 'qSr57tjxxLE', // Replace with your YouTube video ID
+        playerVars: {
+          autoplay: 1,
+          loop: 1,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          enablejsapi: 1,
+          modestbranding: 1,
+          mute: 1, // Start muted
+          playsinline: 1,
+          playlist: 'qSr57tjxxLE' // Required for looping
+        },
+        events: {
+          onReady: (event) => {
+            event.target.mute();
+            event.target.playVideo();
+          },
+          onStateChange: (event) => {
+            // Restart video when it ends
+            if (event.data === window.YT.PlayerState.ENDED) {
+              event.target.playVideo();
+            }
+          }
+        }
+      });
+    };
+
+    // Cleanup function
+    return () => {
+      // Remove the global callback
+      window.onYouTubeIframeAPIReady = null;
+    };
+  }, []);
+
+  // Choose which video implementation to use - YouTube or Google Drive
+  const videoImplementation = (
+    // OPTION 1: YOUTUBE EMBED
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="relative w-full h-full">
+        <div id="youtube-player" className="absolute inset-0 w-full h-full"></div>
+      </div>
+    </div>
+
+    // OPTION 2: GOOGLE DRIVE VIDEO
+    // <video
+    //   className="absolute inset-0 object-cover w-full h-full"
+    //   autoPlay
+    //   loop
+    //   muted={isMuted}
+    //   playsInline
+    // >
+    //   <source src="https://drive.google.com/uc?export=download&id=YOUR_GOOGLE_DRIVE_FILE_ID" type="video/mp4" />
+    //   Your browser does not support the video tag.
+    // </video>
+  );
+
   return (
-    <div className="relative bg-customRed">
-      {/* Container for both image and content */}
-      <div className="relative w-full min-h-screen sm:h-screen ">
-        {/* Background Image Container */}
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{
-            backgroundImage: `url('/images/No-bg-Help.png')`,
-            backgroundSize: "cover", // Ensure image covers entire area
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            height: "100%",
-            width: "100%",
-          }}
-        ></div>
+    <div className="relative bg-black">
+      {/* Container for both video and content */}
+      <div className="relative w-full min-h-screen sm:h-screen overflow-hidden">
+        {/* Background Video */}
+        {videoImplementation}
 
-        {/* Content Container */}
-        <div className="relative flex flex-col justify-center items-center min-h-screen space-y-8 sm:space-y-12 py-10 sm:py-16">
-          {/* Centered Title with Subtitle */}
-          <div className="flex flex-col items-center justify-center space-y-4 px-4 sm:px-8">
-            <h1
-              className="text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-6xl"
-              style={{
-                fontFamily: "Poor Story",
-                fontStyle: "normal",
-                fontWeight: "400",
-                lineHeight: "normal",
-              }}
-            >
-              What is it?
-            </h1>
+        {/* Overlay to allow interaction with buttons */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
-            <p
-              className="text-center text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl"
-              style={{
-                fontFamily: "Poor Story",
-                fontStyle: "normal",
-                fontWeight: "400",
-                lineHeight: "normal",
-              }}
-            >
-              It’s not just a movement; it’s a place where people feel free to
-              be themselves, connecting with others who share their passion for
-              creativity.
-            </p>
+       
+
+        {/* Marquee Text with Top and Bottom Borders */}
+        <div className="absolute bottom-24 w-full overflow-hidden border-t-2 border-b-2 border-white py-3 bg-black bg-opacity-40">
+          <div className="marquee-container">
+            <div className="marquee-text">
+              <p
+                className="text-white text-lg sm:text-xl md:text-2xl font-bold whitespace-nowrap"
+                style={{
+                  fontFamily: "Arial, sans-serif",
+                  fontWeight: "800",
+                  letterSpacing: "1px"
+                }}
+              >
+                EXPERIENCE THE FREEDOM TO BE YOURSELF • CREATIVITY WITHOUT LIMITS • JOIN THE MOVEMENT
+              </p>
+            </div>
           </div>
         </div>
+
+        {/* Audio Control Button */}
+        <button
+          onClick={toggleMute}
+          className="absolute bottom-6 right-6 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70 transition-all z-10"
+        >
+          {isMuted ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+          )}
+        </button>
       </div>
+
+      {/* CSS for marquee animation */}
+      <style jsx>{`
+        @keyframes marquee-right-to-left {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        
+        @keyframes marquee-left-to-right {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .marquee-container {
+          width: 100%;
+          overflow: hidden;
+        }
+        
+        .marquee-text {
+          display: inline-block;
+          white-space: nowrap;
+          animation: marquee-right-to-left 15s linear infinite;
+        }
+        
+        .marquee-text:nth-child(2) {
+          animation: marquee-left-to-right 15s linear infinite;
+          animation-delay: 15s;
+        }
+      `}</style>
     </div>
   );
 };
