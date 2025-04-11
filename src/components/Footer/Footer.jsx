@@ -1,208 +1,142 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  BiLogoTwitter,
+  BiLogoInstagram,
+  BiLogoLinkedin,
+  BiLogoFacebook,
+} from "react-icons/bi";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const Footer = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-  
-  // Split the text for letter-by-letter animation
-  const text = "#LiveToExpress";
-  const letters = Array.from(text);
-  
-  // Animation variants
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
-  };
-  
-  const item = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100
-      }
-    }
-  };
+  const [isVisible, setIsVisible] = useState(false);
 
-  const socialLinks = [
-    { name: "LinkedIn", href: "#linkedin", icon: "🔗" },
-    { name: "Instagram", href: "#instagram", icon: "📸" },
-    { name: "YouTube", href: "#youtube", icon: "🎬" }
-  ];
-  
-  const legalLinks = [
-    { name: "Privacy", href: "#privacy" },
-    { name: "Terms & Conditions", href: "#terms" }
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.body.offsetHeight - 200;
+
+      if (scrollPosition >= pageHeight) {
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="relative bg-gradient-to-br from-purple-800 via-red-600 to-orange-500 overflow-hidden">
-      {/* Animated background bubbles */}
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-white bg-opacity-10"
-          style={{
-            width: 100 + Math.random() * 200,
-            height: 100 + Math.random() * 200,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            x: [0, Math.random() * 100 - 50],
-            y: [0, Math.random() * 100 - 50],
-            scale: [1, 1.1, 0.9, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 8 + Math.random() * 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-      ))}
-
-      {/* Content container */}
-      <div className="relative z-10 flex flex-col justify-center items-center px-4 py-16 md:py-24">
-        {/* Main text animation */}
-        <motion.div
-          className="mb-12"
-          initial="hidden"
-          animate="visible"
-          variants={container}
-        >
-          {letters.map((letter, index) => (
-            <motion.span
-              key={index}
-              variants={item}
-              className="inline-block text-7xl sm:text-8xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-white to-yellow-300"
-              style={{ 
-                fontSize: "clamp(2rem, 6vw, 8rem)",
-                fontFamily: "Poor Story",
-                textShadow: "0 0 10px rgba(255,255,255,0.5)",
-                transform: `rotate(${(mousePosition.x / window.innerWidth - 0.5) * 5}deg)`,
-                transition: "transform 0.2s ease"
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* Social media links */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-6 md:gap-12 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
-          {socialLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              className="flex items-center gap-2 text-white text-xl md:text-2xl hover:scale-110 transition-transform"
-              style={{ fontFamily: "Poor Story" }}
-              whileHover={{ 
-                color: "#FFD700",
-                textShadow: "0 0 8px rgba(255,215,0,0.8)"
-              }}
-            >
-              <span className="text-2xl md:text-3xl">{link.icon}</span>
-              {link.name}
-            </motion.a>
-          ))}
-        </motion.div>
-
-        {/* Legal links */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-6 md:gap-12 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
-          {legalLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              className="text-white text-lg md:text-xl"
-              style={{ fontFamily: "Poor Story" }}
-              whileHover={{ 
-                color: "#FFD700",
-                textShadow: "0 0 8px rgba(255,215,0,0.8)"
-              }}
-            >
-              {link.name}
-            </motion.a>
-          ))}
-        </motion.div>
-
-        {/* Declaration */}
-        <motion.div 
-          className="text-center w-full max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-        >
-          <p
-            className="text-white text-lg md:text-xl"
-            style={{ fontFamily: "Poor Story" }}
+    <footer
+      className={`w-full bg-black py-12 md:py-16 lg:py-20 transition-opacity duration-700 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Big Brand Name */}
+        <div className="mb-8 md:mb-12 overflow-hidden">
+          <h2
+            className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-700 font-['Poor_Story'] transition-transform duration-1000 ${
+              isVisible ? "translate-y-0" : "translate-y-full"
+            }`}
           >
-            Declaration: This is an example declaration for demonstration purposes.
-          </p>
-        </motion.div>
+            #LiveToExpress
+          </h2>
+        </div>
 
-        {/* Audio waveform animation at bottom */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-12 flex items-end justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ delay: 1.6 }}
+        {/* Main Footer Content */}
+        <div className="flex flex-col md:flex-row justify-between mb-8 border-t border-gray-800 pt-8">
+          <div className="mb-6 md:mb-0">
+            <p className="text-sm text-gray-400 font-['Poor_Story']">
+              © 2025 Minimalist. All rights reserved.
+            </p>
+          </div>
+
+          {/* Book a Call Button */}
+          <div className="mb-8 md:mb-0 order-3 md:order-2">
+            <button className="bg-gray-900 text-white rounded-full py-2 sm:py-3 px-4 sm:px-6 flex items-center gap-2 hover:bg-gray-800 transition-all duration-300 group">
+              <div className="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
+                <img
+                  src="/api/placeholder/40/40"
+                  alt="Profile"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col items-start">
+                <span className="font-medium font-['Poor_Story'] text-sm sm:text-base">
+                  Book a Call
+                </span>
+                <span className="text-xs opacity-80 font-['Poor_Story'] hidden sm:block">
+                  Let's talk about creativity
+                </span>
+              </div>
+              <FiArrowUpRight
+                size={16}
+                className="ml-1 sm:ml-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+              />
+            </button>
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 order-2 md:order-3 mb-6 md:mb-0">
+            <div className="flex gap-4 sm:gap-6 flex-wrap">
+              <a
+                href="#"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors font-['Poor_Story']"
+              >
+                Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors font-['Poor_Story']"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors font-['Poor_Story']"
+              >
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Media Icons */}
+        <div
+          className={`flex gap-3 sm:gap-4 justify-center md:justify-end transition-transform duration-1000 ${
+            isVisible ? "translate-y-0" : "translate-y-16"
+          }`}
         >
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-1 md:w-2 mx-1 bg-white rounded-t-full"
-              animate={{
-                height: [
-                  5 + Math.random() * 10,
-                  15 + Math.random() * 30,
-                  5 + Math.random() * 15,
-                  25 + Math.random() * 30,
-                  5 + Math.random() * 10
-                ]
-              }}
-              transition={{
-                duration: 1.2,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: i * 0.05
-              }}
-            />
-          ))}
-        </motion.div>
+          <a
+            href="#"
+            className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+            aria-label="Twitter"
+          >
+            <BiLogoTwitter size={16} className="text-gray-300" />
+          </a>
+          <a
+            href="#"
+            className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+            aria-label="Instagram"
+          >
+            <BiLogoInstagram size={16} className="text-gray-300" />
+          </a>
+          <a
+            href="#"
+            className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+            aria-label="LinkedIn"
+          >
+            <BiLogoLinkedin size={16} className="text-gray-300" />
+          </a>
+          <a
+            href="#"
+            className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+            aria-label="Facebook"
+          >
+            <BiLogoFacebook size={16} className="text-gray-300" />
+          </a>
+        </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

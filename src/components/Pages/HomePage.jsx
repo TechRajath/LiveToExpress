@@ -1,32 +1,32 @@
 import React from "react";
 const HomePage = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  
+
   // Array of background images
   const backgroundImages = [
-    'https://static01.nyt.com/images/2023/01/18/multimedia/16old-new-01-gzfp/16old-new-01-gzfp-videoSixteenByNineJumbo1600.jpg',
-    'https://www.kentpaulette.com/wp-content/uploads/bear-painting-abstract-animal-art-kent-paulette.jpg',
-    'https://cdn1.realitytitbit.com/uploads/26/2023/01/GettyImages-884577768-1536x1024.jpg',
-    'https://buenosairesstreetart.com/wp-content/uploads/2022/11/nia-fase-mexico-graffiti-buenos-aires-argentina-letras-3d-pieza-graffitera-mujer-artista.jpg'
+    "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/6871/images/24d3166-c8f2-b5e3-1405-1070bea48e_IMG_2342_copy.jpg",
+    "https://media.mutualart.com/Images//2020_10/16/13/132832261/41b83a86-6ae5-45b3-ba0b-3ff0aa04b0f1.Jpeg",
+    "https://engageart.org/wp-content/uploads/2018/01/angelina-litvin-37702ADJ.jpg",
+    "https://realismtoday.com/wp-content/uploads/2023/03/contemporary-realism-art-Michael-Klein-Studio_shot3.jpg",
   ];
-  
+
   // Array of texts to display
   const headingTexts = [
     "Why #LiveToExpress",
     "Express Yourself",
     "Be Authentic",
-    "Show Your Colors"
+    "Show Your Colors",
   ];
-  
+
   // Effect to change the background and text every 4 seconds
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
     }, 4000);
-    
+
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <div className="relative min-h-screen text-white font-poorstory overflow-hidden">
       {/* Background Image with opacity */}
