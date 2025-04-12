@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import db from "../../FirebaseConfig/firebase-config";
@@ -11,6 +11,7 @@ const ModalGrid = ({ scrollToSection }) => {
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [textColor, setTextColor] = useState("bg-red-700");
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -61,7 +62,23 @@ const ModalGrid = ({ scrollToSection }) => {
     }
     setIsLoading(false);
   };
+  //This logic is added to change the header text color dynamically as user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
 
+      if (scrollPosition > 600) {
+        setTextColor("bg-red-700");
+      } else if (scrollPosition > 2000) {
+        setTextColor("bg-white-700");
+      } else {
+        setTextColor("bg-red-700");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div>
       {/* Navbar */}
@@ -83,11 +100,7 @@ const ModalGrid = ({ scrollToSection }) => {
     font-bold tracking-wider
     bg-clip-text text-transparent 
     transition-all duration-500 ease-in-out
-    ${
-      isMenuOpen
-        ? "bg-gradient-to-r from-white to-black"
-        : "bg-gradient-to-r from-black to-white"
-    }
+    ${isMenuOpen ? "bg-white" : textColor}
   `}
           style={{
             fontFamily: "Poor Story",
@@ -184,12 +197,6 @@ const ModalGrid = ({ scrollToSection }) => {
                   className="hover:underline mx-4 text-center text-white font-black"
                 >
                   MINIMALIST INSTITUTE
-                </a>
-                <a
-                  href="#"
-                  className="hover:underline mx-4 text-center text-white font-black"
-                >
-                  PIGEONPOST
                 </a>
               </div>
             </div>

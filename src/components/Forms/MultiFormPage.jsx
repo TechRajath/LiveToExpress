@@ -2,6 +2,7 @@ import { useState } from "react";
 import db from "../../FirebaseConfig/firebase-config";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import HeadingWithUnderline from "../UIElements/HeadingWithUnderline";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -81,18 +82,19 @@ const Form = () => {
   return (
     <div className="w-full min-h-screen bg-white p-4 md:p-8 lg:p-12 font-['Poor_Story']">
       <ToastContainer />
+      <div className="flex flex-col md:flex-row justify-between items-start mb-8">
+        <HeadingWithUnderline
+          headingText="Fuel Your Creative Mind 🔥"
+          textColor=""
+          underLineColor="red"
+        />
+        <p className="text-2xl sm:text-2xl md:text-3xl text-black font-normal capitalize mb-8">
+          #LiveToExpress is conducting live creative events to help you express
+          & experience. Fill in the form below to share your interests and we
+          will contact you!
+        </p>
+      </div>
       <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start mb-8">
-          <h1 className="text-4xl sm:text-4xl md:text-5xl font-normal text-black mb-4 md:mb-0">
-            START HERE
-          </h1>
-          <p className="text-2xl sm:text-2xl md:text-3xl max-w-xl text-black font-normal capitalize">
-            #LiveToExpress is conducting live creative events to help you
-            express & experience. Fill in the form below to share your interests
-            and we will contact you!
-          </p>
-        </div>
-
         <div className="flex gap-4 mb-8">
           <button
             onClick={() =>

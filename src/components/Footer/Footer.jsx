@@ -32,14 +32,23 @@ const Footer = () => {
     >
       <div className="container mx-auto px-4 sm:px-6">
         {/* Big Brand Name */}
-        <div className="mb-8 md:mb-12 overflow-hidden">
+        <div className="mb-8 md:mb-12 overflow-hidden flex flex-col items-start">
           <h2
-            className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-700 font-['Poor_Story'] transition-transform duration-1000 ${
+            className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-red-700 font-['Poor_Story'] transition-transform duration-1000 ${
               isVisible ? "translate-y-0" : "translate-y-full"
             }`}
           >
             #LiveToExpress
           </h2>
+          <p
+            className={`text-md md:text-base lg:text-lg text-red-600 font-['Poor_Story'] mt-2 transition-transform duration-1000 delay-200 ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-full opacity-0"
+            }`}
+          >
+            a product by Minimalist Institute
+          </p>
         </div>
 
         {/* Main Footer Content */}
@@ -88,7 +97,7 @@ const Footer = () => {
                 href="#"
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors font-['Poor_Story']"
               >
-                Privacy Policy
+                Privacy Terms
               </a>
               <a
                 href="#"

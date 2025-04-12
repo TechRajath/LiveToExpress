@@ -1,5 +1,6 @@
-import React, { useRef,useState  } from "react";
-import { ChevronLeft, ChevronRight } from 'lucide-react'; 
+import React, { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import HeadingWithUnderline from "../UIElements/HeadingWithUnderline";
 const CreativeCorner = () => {
   const scrollRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -42,9 +43,9 @@ const CreativeCorner = () => {
     "Fusion of traditional and digital media",
     "Color theory in practice",
     "Geometric abstraction study",
-    "Minimalist composition"
+    "Minimalist composition",
   ];
-   // Mouse handlers
+  // Mouse handlers
   const handleMouseDown = (e) => {
     const slider = scrollRef.current;
     let startX = e.pageX - slider.offsetLeft;
@@ -101,24 +102,16 @@ const CreativeCorner = () => {
 
   return (
     <div className="bg-black w-full py-8 px-4 md:py-12 md:px-8">
-      <h1
-        className="font-['Poor_Story'] text-white text-center mb-6"
-        style={{
-          fontSize: "clamp(32px, 5vw, 80px)",
-          lineHeight: "normal",
-        }}
-      >
-        CREATIVE CORNER
-      </h1>
+      <HeadingWithUnderline headingText="Creative Corner &#128161;" />
 
-      <div className="flex justify-center gap-8 mb-6">
-        <button 
+      <div className="flex justify-start gap-8 mb-6 ml-10">
+        <button
           onClick={scrollLeft}
           className="bg-transparent text-white border-2 border-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-white hover:text-black transition-all"
         >
           <ChevronLeft size={32} />
         </button>
-        <button 
+        <button
           onClick={scrollRight}
           className="bg-transparent text-white border-2 border-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-white hover:text-black transition-all"
         >
@@ -134,25 +127,38 @@ const CreativeCorner = () => {
       >
         <div className="flex gap-8 p-4 min-w-max">
           {images.map((src, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className={`border-2 border-white ${hoveredIndex === index ? '' : 'rounded-lg'} p-2 transition-all duration-300`}>
+              <div
+                className={`border-2 border-white ${
+                  hoveredIndex === index ? "" : "rounded-lg"
+                } p-2 transition-all duration-300`}
+              >
                 <img
                   src={src}
                   alt={`Creative work ${index + 1}`}
-                  className={`w-80 h-96 md:w-96 md:h-112 object-cover ${hoveredIndex === index ? '' : 'rounded-lg'} select-none transition-all duration-300`}
+                  className={`w-80 h-96 md:w-96 md:h-112 object-cover ${
+                    hoveredIndex === index ? "" : "rounded-lg"
+                  } select-none transition-all duration-300`}
                   draggable="false"
                 />
-                <div 
+                <div
                   className={`absolute inset-x-0 bottom-0 bg-yellow-500 bg-opacity-70 flex items-center justify-center p-4 transition-all duration-500 ${
-                    hoveredIndex === index ? 'h-24 opacity-100' : 'h-0 opacity-0'
+                    hoveredIndex === index
+                      ? "h-24 opacity-100"
+                      : "h-0 opacity-0"
                   }`}
                 >
-                  <p className="text-black text-center font-medium text-lg">
+                  <p
+                    className="text-black text-center font-medium text-lg"
+                    style={{
+                      fontFamily: "Poor Story",
+                    }}
+                  >
                     {imageCaptions[index % imageCaptions.length]}
                   </p>
                 </div>
@@ -169,7 +175,7 @@ const CreativeCorner = () => {
           lineHeight: "normal",
         }}
       >
-        Creative explorations done by ...
+        Creative explorations done by the individuals ...
       </p>
     </div>
   );

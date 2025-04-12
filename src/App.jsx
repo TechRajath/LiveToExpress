@@ -15,6 +15,7 @@ import About from "./components/Pages/About";
 import What from "./components/Pages/What";
 import Animation from "./components/AnimationTest/Animation";
 import LandingPage from "./components/LandingPage/LandingPage";
+import Location from "./components/Pages/Location";
 
 const AppContent = () => {
   const location = useLocation();
@@ -78,6 +79,7 @@ const AppContent = () => {
                 <div ref={formRef}>
                   <MultiFormPage />
                 </div>
+                <Location />
                 <Footer />
               </>
             }
