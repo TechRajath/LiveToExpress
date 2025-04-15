@@ -11,7 +11,7 @@ const ModalGrid = ({ scrollToSection }) => {
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [textColor, setTextColor] = useState("bg-red-700");
+
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -62,23 +62,7 @@ const ModalGrid = ({ scrollToSection }) => {
     }
     setIsLoading(false);
   };
-  //This logic is added to change the header text color dynamically as user scrolls
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
 
-      if (scrollPosition > 600) {
-        setTextColor("bg-red-700");
-      } else if (scrollPosition > 2000) {
-        setTextColor("bg-white-700");
-      } else {
-        setTextColor("bg-red-700");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   return (
     <div>
       {/* Navbar */}
@@ -100,7 +84,7 @@ const ModalGrid = ({ scrollToSection }) => {
     font-bold tracking-wider
     bg-clip-text text-transparent 
     transition-all duration-500 ease-in-out
-    ${isMenuOpen ? "bg-white" : textColor}
+    bg-white
   `}
           style={{
             fontFamily: "Poor Story",

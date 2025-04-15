@@ -102,9 +102,19 @@ const CreativeCorner = () => {
 
   return (
     <div className="bg-black w-full py-8 px-4 md:py-12 md:px-8">
-      <HeadingWithUnderline headingText="Creative Corner &#128161;" />
+      <h1
+        className={`whitespace-nowrap overflow-hidden text-ellipsis 
+             text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl 
+             font-bold text-center max-w-full text-white`}
+        style={{
+          fontFamily: "'Poor Story', cursive",
+          lineHeight: "1.2",
+        }}
+      >
+        Creative corner
+      </h1>
 
-      <div className="flex justify-start gap-8 mb-6 ml-10">
+      <div className="flex justify-center gap-8 mb-6  mt-10">
         <button
           onClick={scrollLeft}
           className="bg-transparent text-white border-2 border-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-white hover:text-black transition-all"

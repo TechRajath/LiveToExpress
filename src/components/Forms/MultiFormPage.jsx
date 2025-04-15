@@ -80,30 +80,25 @@ const Form = () => {
     "border-b border-gray-300 p-2 bg-white text-black placeholder-black text-xl sm:text-2xl md:text-3xl focus:outline-none focus:border-black font-['Poor_Story'] capitalize";
 
   return (
-    <div className="w-full min-h-screen bg-white p-4 md:p-8 lg:p-12 font-['Poor_Story']">
+    <div className="w-full min-h-screen bg-black p-4 md:p-8 lg:p-12 font-['Poor_Story']">
       <ToastContainer />
       <div className="flex flex-col md:flex-row justify-between items-start mb-8">
-        <HeadingWithUnderline
-          headingText="Fuel Your Creative Mind 🔥"
-          textColor=""
-          underLineColor="red"
-        />
-        <p className="text-2xl sm:text-2xl md:text-3xl text-black font-normal capitalize mb-8">
+        <p className="text-2xl sm:text-2xl md:text-3xl text-white font-normal capitalize mb-8 mx-auto text-left max-w-3xl">
           #LiveToExpress is conducting live creative events to help you express
           & experience. Fill in the form below to share your interests and we
           will contact you!
         </p>
       </div>
       <div className="max-w-4xl mx-auto">
-        <div className="flex gap-4 mb-8">
+        <div className="flex gap-4 mb-8 justify-center">
           <button
             onClick={() =>
               setFormData({ ...formData, selectedType: "Express It" })
             }
             className={`px-6 py-2 rounded-full text-lg transition-colors font-normal capitalize ${
               formData.selectedType === "Express It"
-                ? "bg-black text-white"
-                : "bg-gray-200 text-black"
+                ? "bg-white text-black"
+                : "bg-gray-700 text-white"
             }`}
           >
             Express It
@@ -114,8 +109,8 @@ const Form = () => {
             }
             className={`px-6 py-2 rounded-full text-lg transition-colors font-normal capitalize ${
               formData.selectedType === "Experience It"
-                ? "bg-black text-white"
-                : "bg-gray-200 text-black"
+                ? "bg-white text-black"
+                : "bg-gray-700 text-white"
             }`}
           >
             Experience It
@@ -130,7 +125,7 @@ const Form = () => {
               placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
-              className={baseInputStyles}
+              className={`${baseInputStyles} !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none focus:!bg-black`}
             />
             <input
               type="text"
@@ -138,7 +133,7 @@ const Form = () => {
               placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
-              className={baseInputStyles}
+              className={`${baseInputStyles} !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none focus:!bg-black`}
             />
           </div>
 
@@ -146,14 +141,14 @@ const Form = () => {
             <button
               type="button"
               onClick={() => setShowDropdown(!showDropdown)}
-              className={`w-full text-left ${baseInputStyles}`}
+              className={`w-full text-left !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none ${baseInputStyles} focus:!bg-black`}
             >
               {formData.interests.length > 0
                 ? formData.interests.join(", ")
                 : "Select Interests"}
             </button>
             {showDropdown && (
-              <div className="absolute mt-1 w-full bg-white border border-gray-300 shadow-lg rounded-md p-4 z-10">
+              <div className="absolute mt-1 w-full !bg-black border border-white shadow-lg rounded-md p-4 z-10">
                 {["Art", "Music", "Dance"].map((interest) => (
                   <label
                     key={interest}
@@ -163,9 +158,9 @@ const Form = () => {
                       type="checkbox"
                       checked={formData.interests.includes(interest)}
                       onChange={() => handleCheckboxChange(interest)}
-                      className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
+                      className="w-4 h-4 !bg-black text-white border-white rounded focus:ring-white focus:!bg-black"
                     />
-                    <span className="text-lg text-black">{interest}</span>
+                    <span className="text-lg text-white">{interest}</span>
                   </label>
                 ))}
               </div>
@@ -179,7 +174,7 @@ const Form = () => {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
-              className={baseInputStyles}
+              className={`${baseInputStyles} !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none focus:!bg-black`}
             />
             <input
               type="email"
@@ -187,7 +182,7 @@ const Form = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className={baseInputStyles}
+              className={`${baseInputStyles} !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none focus:!bg-black`}
             />
           </div>
 
@@ -197,13 +192,13 @@ const Form = () => {
             value={formData.message}
             onChange={handleChange}
             rows={4}
-            className={`w-full ${baseInputStyles}`}
+            className={`w-full ${baseInputStyles} !bg-black text-white placeholder-gray-300 border-t-0 border-r-0 border-l-0 border-b-2 border-white rounded-none focus:!bg-black`}
           />
 
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-6 py-2 bg-black text-white text-base sm:text-lg md:text-2xl transition-colors font-normal capitalize"
+              className="px-6 py-2 bg-white text-black text-base sm:text-lg md:text-2xl transition-colors font-normal capitalize hover:bg-gray-200"
             >
               Submit
             </button>

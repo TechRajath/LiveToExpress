@@ -75,8 +75,18 @@ const About = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-slate-900 flex flex-col justify-center items-center overflow-hidden w-full">
-      <HeadingWithUnderline headingText="What we focus on &#129488;" />
+    <div className="relative min-h-screen bg-black flex flex-col justify-center items-center overflow-hidden w-full">
+      <h1
+        className={`whitespace-nowrap overflow-hidden text-ellipsis 
+             text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl 
+             font-bold text-left max-w-full text-white`}
+        style={{
+          fontFamily: "'Poor Story', cursive",
+          lineHeight: "1.9",
+        }}
+      >
+        What we focus on
+      </h1>
 
       {/* Flowing Art Words */}
       <section className="py-20 relative w-full overflow-hidden">

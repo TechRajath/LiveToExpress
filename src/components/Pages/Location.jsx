@@ -39,19 +39,21 @@ const Location = () => {
   return (
     <div className="relative bg-black text-white min-h-screen">
       {/* Heading with artistic touch */}
-      <HeadingWithUnderline headingText="Where we Create 📍" />
+      <h1
+        className={`whitespace-nowrap overflow-hidden text-ellipsis 
+             text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl 
+             font-bold text-center max-w-full text-white`}
+        style={{
+          fontFamily: "'Poor Story', cursive",
+          lineHeight: "1.9",
+        }}
+      >
+        Where we create
+      </h1>
 
       <div className="flex flex-col lg:flex-row p-4 lg:p-8 gap-6">
         {/* Left Side - Image Grid (Full width on mobile, 50% on desktop) */}
         <div className="w-full lg:w-1/2">
-          <h3
-            className="text-xl font-bold mb-4 text-yellow-300"
-            style={{
-              fontFamily: "Poor Story",
-            }}
-          >
-            The Vibe &#127912;
-          </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {cafeImages.slice(0, 6).map((image) => (
               <div
@@ -64,11 +66,6 @@ const Location = () => {
                   className="w-full h-full object-cover rounded-lg brightness-75 group-hover:brightness-100 transition-all"
                   onClick={() => setSelectedImage(image)}
                 />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="bg-black/70 px-2 py-1 rounded text-sm">
-                    Click to View
-                  </span>
-                </div>
               </div>
             ))}
           </div>
@@ -76,49 +73,27 @@ const Location = () => {
 
         {/* Right Side - Map (Full width on mobile, 50% on desktop) */}
         <div className="w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-auto">
-          <div className="relative h-full rounded-xl overflow-hidden border-2 border-yellow-400 shadow-lg shadow-yellow-400/20">
+          <div className="relative h-full rounded-xl overflow-hidden border-2 border-yellow-400 shadow-lg shadow-yellow-400/20 bg-gray-900">
             <iframe
-              src="https://maps.google.com/maps?q=The+Hole+In+The+Wall+Cafe&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.715070381428!2d77.6773162!3d12.9019407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae133ff2be25f9%3A0xfc1954527c905224!2sMighty%20Paws%20Cafe%20%26%20Bakery!5e0!3m2!1sen!2sin!4v1715781234567!5m2!1sen!2sin"
               width="100%"
               height="100%"
               allowFullScreen
               loading="lazy"
-              className="filter grayscale(20%) contrast(110%)"
+              className="filter grayscale(20%) contrast(110%) brightness(0.8)"
               style={{ border: 0 }}
             ></iframe>
+            {/* Custom Marker */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="animate-pulse bg-yellow-400 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center">
+              <div className="animate-pulse bg-yellow-400 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-lg shadow-yellow-400/50">
                 <div className="bg-red-500 w-3 h-3 sm:w-4 sm:h-4 rounded-full"></div>
               </div>
             </div>
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-gray-900/30 pointer-events-none"></div>
           </div>
         </div>
       </div>
-
-      {/* Image Popup Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-4xl max-h-[90vh]">
-            <img
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              className="w-full h-full object-contain rounded-lg"
-            />
-            <button
-              className="absolute top-4 right-4 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage(null);
-              }}
-            >
-              ×
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

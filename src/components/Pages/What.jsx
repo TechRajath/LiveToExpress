@@ -94,7 +94,17 @@ const What = () => {
   return (
     <div className="relative bg-black">
       {/* Added heading with underline - left aligned */}
-      <HeadingWithUnderline headingText="Art in Motion &#129535;" />
+      <h1
+        className={`whitespace-nowrap overflow-hidden text-ellipsis 
+             text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl 
+             font-bold text-center max-w-full text-white`}
+        style={{
+          fontFamily: "'Poor Story', cursive",
+          lineHeight: "1.9",
+        }}
+      >
+        Art in Motion
+      </h1>
 
       <div className="flex flex-col items-start p-4 w-full">
         {/* Container for both video and content */}
