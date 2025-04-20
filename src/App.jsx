@@ -16,6 +16,7 @@ import What from "./components/Pages/What";
 import Animation from "./components/AnimationTest/Animation";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Location from "./components/Pages/Location";
+import Events from "./components/Pages/Events";
 
 const AppContent = () => {
   const location = useLocation();
@@ -73,6 +74,7 @@ const AppContent = () => {
                 <div ref={twoRef}>
                   <What />
                 </div>
+                <Events />
                 <div ref={sliderRef}>
                   <CreativeCorner />
                 </div>
