@@ -17,6 +17,7 @@ import Animation from "./components/AnimationTest/Animation";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Location from "./components/Pages/Location";
 import Events from "./components/Pages/Events";
+import FloatingTestimonialCards from "./components/Pages/FloatingTestimonialCards";
 
 const AppContent = () => {
   const location = useLocation();
@@ -82,6 +83,7 @@ const AppContent = () => {
                   <MultiFormPage />
                 </div>
                 <Location />
+                <FloatingTestimonialCards />
                 <Footer />
               </>
             }

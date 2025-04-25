@@ -130,7 +130,7 @@ export default function Events() {
                       font-bold text-white inline-block"
             style={{
               fontFamily: "'Poor Story', cursive",
-              lineHeight: "1.2",
+              lineHeight: "3",
             }}
           >
             Popular events
@@ -164,7 +164,7 @@ export default function Events() {
           {eventsData.map((event, index) => (
             <div
               key={event.id}
-              className="flex-none w-64 md:w-72 mr-4 snap-start bg-gray-800 rounded-xl overflow-hidden shadow-lg"
+              className="flex-none w-64 md:w-72 mr-4 snap-start bg-black rounded-xl overflow-hidden shadow-lg"
               style={{ fontFamily: "'Poor Story', cursive" }}
             >
               <div className="relative h-40 md:h-48 lg:h-56">

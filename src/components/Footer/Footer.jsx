@@ -26,9 +26,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`w-full bg-black py-12 md:py-16 lg:py-20 transition-opacity duration-700 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      className={`w-full bg-black py-12 md:py-16 lg:py-20 transition-opacity duration-700 opacity-100`}
     >
       <div className="container mx-auto px-4 sm:px-6">
         {/* Big Brand Name */}
