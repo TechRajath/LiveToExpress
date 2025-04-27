@@ -113,17 +113,6 @@ const What = () => {
     });
   }, [videos]);
 
-  const toggleGlobalMute = useCallback(() => {
-    const newMuteState = !isMuted;
-    setIsMuted(newMuteState);
-    setIndividualMutes(Array(videos.length).fill(newMuteState));
-    playersRef.current.forEach((player) => {
-      if (player) {
-        newMuteState ? player.mute() : player.unMute();
-      }
-    });
-  }, [isMuted, videos.length]);
-
   const toggleIndividualMute = useCallback((index) => {
     setIndividualMutes((prev) => {
       const newMutes = [...prev];
@@ -368,7 +357,23 @@ const What = () => {
           ))}
         </div>
       </div>
-
+      <div className="absolute bottom-29 w-full overflow-hidden border-t-2 border-b-2 border-white py-3 bg-black bg-opacity-40">
+        <div className="marquee-container">
+          <div className="marquee-text">
+            <p
+              className="text-white text-lg sm:text-xl md:text-2xl font-bold whitespace-nowrap"
+              style={{
+                fontFamily: "Poor Story",
+                fontWeight: "800",
+                letterSpacing: "1px",
+              }}
+            >
+              EXPERIENCE THE FREEDOM TO BE YOURSELF • CREATIVITY WITHOUT LIMITS
+              • JOIN THE MOVEMENT
+            </p>
+          </div>
+        </div>
+      </div>
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -388,6 +393,39 @@ const What = () => {
         /* Apply Poor Story font to all text */
         body {
           font-family: "Poor Story", cursive;
+        }
+        @keyframes marquee-right-to-left {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+
+        @keyframes marquee-left-to-right {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        .marquee-container {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .marquee-text {
+          display: inline-block;
+          white-space: nowrap;
+          animation: marquee-right-to-left 15s linear infinite;
+        }
+
+        .marquee-text:nth-child(2) {
+          animation: marquee-left-to-right 15s linear infinite;
+          animation-delay: 15s;
         }
       `}</style>
     </div>

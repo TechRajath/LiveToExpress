@@ -130,7 +130,7 @@ export default function Events() {
                       font-bold text-white inline-block"
             style={{
               fontFamily: "'Poor Story', cursive",
-              lineHeight: "3",
+              lineHeight: "5",
             }}
           >
             Popular events
