@@ -10,14 +10,6 @@ const HomePage = () => {
     "https://realismtoday.com/wp-content/uploads/2023/03/contemporary-realism-art-Michael-Klein-Studio_shot3.jpg",
   ];
 
-  // Array of texts to display
-  const headingTexts = [
-    "Why #LiveToExpress",
-    "Express Yourself",
-    "Be Authentic",
-    "Show Your Colors",
-  ];
-
   // Effect to change the background and text every 4 seconds
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -36,21 +28,6 @@ const HomePage = () => {
           backgroundImage: `url('${backgroundImages[currentIndex]}')`,
         }}
       ></div>
-
-      {/* Content Section */}
-      <div className="relative flex flex-col justify-center items-center min-h-screen px-4">
-        {/* Centered Title */}
-        <div className="flex flex-col items-center justify-center">
-          <h1
-            className="text-center text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold transition-all duration-1000"
-            style={{
-              fontFamily: "Poor Story",
-            }}
-          >
-            {headingTexts[currentIndex]}
-          </h1>
-        </div>
-      </div>
     </div>
   );
 };
